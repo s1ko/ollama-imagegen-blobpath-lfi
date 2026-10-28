@@ -1,0 +1,10 @@
+x/imagegen/manifest not present in this checkout: BlobPath tests skipped
+=== RUN   TestPoC_Download_EarlyExitCacheBypass_AcceptsTraversalDigest
+    poc_test.go:44: Download returned error: blob "sha256:../../../victim": invalid digest format — early-exit not hit
+--- FAIL: TestPoC_Download_EarlyExitCacheBypass_AcceptsTraversalDigest (0.00s)
+=== RUN   TestPoC_Download_EarlyExitChainEndState
+    poc_test.go:89: Download returned error: blob "sha256:../../../victim_a": invalid digest format
+--- FAIL: TestPoC_Download_EarlyExitChainEndState (0.00s)
+FAIL
+FAIL	github.com/ollama/ollama/transfer	0.009s
+FAIL

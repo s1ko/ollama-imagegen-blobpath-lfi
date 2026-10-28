@@ -1,0 +1,9 @@
+x/imagegen/manifest not present in this checkout: BlobPath tests skipped
+=== RUN   TestPoC_Download_EarlyExitCacheBypass_AcceptsTraversalDigest
+    poc_test.go:49: Early-exit cache bypass confirmed: traversal digest accepted, no HTTP request made, malicious 'blob' considered downloaded → manifest commit would proceed.
+--- PASS: TestPoC_Download_EarlyExitCacheBypass_AcceptsTraversalDigest (0.00s)
+=== RUN   TestPoC_Download_EarlyExitChainEndState
+    poc_test.go:99: Confirmed: 2 traversal digests accepted, 0 HTTP requests, destDir empty. In a real pull flow, the manifest containing these digests would now be committed to disk by pullWithTransfer.
+--- PASS: TestPoC_Download_EarlyExitChainEndState (0.00s)
+PASS
+ok  	github.com/ollama/ollama/x/transfer
